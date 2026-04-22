@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Приглашение в проект - NotesApp</title>
+    <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h2>📨 Приглашение в проект</h2>
+            <div id="inviteInfo"></div>
+            <div style="display: flex; gap: 10px;">
+                <button onclick="acceptInvite()" id="acceptBtn">Принять приглашение</button>
+                <button onclick="window.location.href='./projects.html'" class="secondary">Отказаться</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="./js/common.js"></script>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const inviteToken = urlParams.get('token');
+        
+        if (!inviteToken) {
+            window.location.href = './projects.html';
+        }
+        
+        async function acceptInvite() {
+            const token = getToken();
+            
+            if (!token) {
+                // Сохраняем токен приглашения и перенаправляем на логин
+                localStorage.setItem('pendingInvite', inviteToken);
+                window.location.href = './login.html';
+                return;
+            }
+            
+            try {
+                const response = await apiRequest('/invites/accept', {
+                    method: 'POST',
+                    body: JSON.stringify({ token: inviteToken })
+                });
+                
+                if (response.ok) {
+                    showMessage('Вы добавлены в проект!', 'success');
+                    setTimeout(() => {
+                        window.location.href = './projects.html';
+                    }, 1500);
+                } else {
+                    const error = await response.json();
+                    showMessage(error.message || 'Ошибка принятия приглашения');
+                }
+            } catch (error) {
+                showMessage('Ошибка соединения с сервером');
+            }
+        }
+        
+        // Если не авторизованы, показываем сообщение
+        if (!isAuthenticated()) {
+            document.getElementById('inviteInfo').innerHTML = `
+                <p style="margin: 20px 0;">Для принятия приглашения необходимо войти в аккаунт.</p>
+                <p>Вы будете перенаправлены на страницу входа.</p>
+            `;
+        } else {
+            document.getElementById('inviteInfo').innerHTML = `
+                <p style="margin: 20px 0;">Вас пригласили присоединиться к проекту.</p>
+                <p>Нажмите "Принять", чтобы продолжить.</p>
+            `;
+        }
+    </script>
+</body>
+</html>

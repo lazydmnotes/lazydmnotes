@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Заметки - NotesApp</title>
+    <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="navbar">
+            <div class="logo">📝 NotesApp</div>
+            <div class="user-info">
+                <span class="username" id="username"></span>
+                <button onclick="logout()" class="logout-btn">Выйти</button>
+            </div>
+        </div>
+        
+        <div class="card">
+            <button onclick="window.location.href='./projects.html'" class="secondary" style="margin-bottom: 20px;">
+                ← Назад к проектам
+            </button>
+            
+            <div id="projectInfo">
+                <div style="text-align: center;">Загрузка проекта...</div>
+            </div>
+            
+            <button onclick="showCreateMapModal()" class="add-button">+ Новая карта</button>
+            
+            <div id="mapsList" class="maps-list">
+                <div style="text-align: center;">Загрузка карт...</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Модальное окно создания/редактирования заметки -->
+    <div id="mapModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="mapModalTitle">Создать карту</h3>
+                <button class="close-modal" onclick="closeMapModal()">&times;</button>
+            </div>
+            <form id="mapForm">
+                <div class="form-group">
+                    <label>Название</label>
+                    <input type="text" id="mapTitle" required>
+                </div>
+                <div class="form-group">
+                    <label>Описание</label>
+                    <textarea id="mapDescription" rows="6"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Ссылка на изображение</label>
+                    <input type="text" id="mapImageUrl" title="Если вы хотите использовать изображение с диска, то
+    1. Разрешите доступ к изображению по ссылке
+    2. Откройте изображение для просмотра, нажмите по нему правой кнопкой мыши
+    3. В открывшемся контекстном меню выберите 'Открыть оригинал' - изображение откроется в новой вкладке
+    4. Нажмите правой кнопкой мыши по открывшемуся изображению и выберите пункт 'Копировать ссылку/URL'
+    5. Вставьте скопированную ссылку сюда">
+                </div>
+                <button type="submit">Сохранить</button>
+            </form>
+        </div>
+    </div>
+    
+    <script src="./js/common.js"></script>
+    <script src="./js/project.js"></script>
+</body>
+</html>
