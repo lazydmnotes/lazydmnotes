@@ -1,5 +1,5 @@
 // Конфигурация
-const API_URL = 'http://5.188.25.47:8080/api'; //> Замените на ваш URL
+const API_URL = 'https://5.188.25.47:8080/api';
 
 // Общие функции
 function getToken() {
