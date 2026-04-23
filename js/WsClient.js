@@ -1,5 +1,5 @@
 const WS_REQ_PREFIX = '/app';
-const WS_URL = 'http://5.188.25.47:8080/ws';
+const WS_URL = 'https://lazydmnotes.ru/ws';
 
 class WsClient {
     constructor(token, mapId) {
