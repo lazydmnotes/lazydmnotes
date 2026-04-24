@@ -1,5 +1,5 @@
 const WS_REQ_PREFIX = '/app';
-const WS_URL = 'https://lazydmnotes.ru/ws';
+const WS_URL = 'https://api.lazydmnotes.ru/ws';
 
 class WsClient {
     constructor(token, mapId) {
