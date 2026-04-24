@@ -1,5 +1,5 @@
 // Конфигурация
-const API_URL = 'https://lazydmnotes.ru/api';
+const API_URL = 'https://api.lazydmnotes.ru/api';
 
 // Общие функции
 function getToken() {
